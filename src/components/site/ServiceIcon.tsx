@@ -1,4 +1,4 @@
-const ACCENT = "oklch(88% 0.22 130)";
+const ACCENT = "oklch(40% 0.1 160)";
 
 export function ServiceIcon({ index, size = 20 }: { index: number; size?: number }) {
   const props = {

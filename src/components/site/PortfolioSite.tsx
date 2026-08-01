@@ -4,16 +4,29 @@ import { useState } from "react";
 import { Lang, SiteContent } from "@/lib/content-types";
 import { ServiceIcon } from "./ServiceIcon";
 
-const BG = "oklch(19% 0.03 150)";
-const BORDER = "oklch(27% 0.03 150)";
-const BORDER2 = "oklch(29% 0.03 150)";
-const BORDER3 = "oklch(31% 0.03 150)";
-const CARD = "oklch(23% 0.03 150)";
-const ACCENT = "oklch(88% 0.22 130)";
-const TEXT = "#f5f5f0";
-const MUTED = "#9baa9f";
-const MUTED2 = "#c3d0c7";
-const MUTED3 = "#7c8a80";
+const BG = "oklch(94% 0.02 80)";
+const BORDER = "oklch(87% 0.03 80)";
+const CARD = "oklch(97% 0.015 80)";
+const ACCENT = "oklch(40% 0.1 160)";
+const ACCENT_TEXT = "#eef7ec";
+const BORDEAUX = "#7F041E";
+const CREAM = "#F2EADD";
+const TEXT = "#233024";
+const MUTED = "#6b7a68";
+const MUTED2 = "#546b50";
+const MUTED3 = "#7d8a79";
+
+const HIGHLIGHT_PHRASES = ["Data & IA", "Data & AI"];
+
+function splitHighlight(text: string) {
+  for (const phrase of HIGHLIGHT_PHRASES) {
+    const idx = text.indexOf(phrase);
+    if (idx !== -1) {
+      return { before: text.slice(0, idx), highlight: phrase, after: text.slice(idx + phrase.length) };
+    }
+  }
+  return { before: text, highlight: null as string | null, after: "" };
+}
 
 export function PortfolioSite({ content }: { content: SiteContent }) {
   const [lang, setLang] = useState<Lang>("fr");
@@ -23,6 +36,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
   const t = content[lang];
   const services = t.services.list;
   const active = activeService !== null ? services[activeService] : null;
+  const subtitleParts = splitHighlight(t.hero.subtitle);
 
   function goHome() {
     setActiveService(null);
@@ -60,7 +74,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
             onClick={() => setLang((l) => (l === "fr" ? "en" : "fr"))}
             style={{
               background: ACCENT,
-              color: "#101a13",
+              color: ACCENT_TEXT,
               border: "none",
               borderRadius: 100,
               padding: "7px 16px",
@@ -75,22 +89,52 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
 
       {activeService === null && (
         <>
-          <div id="hero" style={{ borderBottom: `1px solid ${BORDER}` }}>
-            <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 48px 60px" }}>
-              <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: ACCENT, marginBottom: 20 }}>
+          <div id="hero" style={{ borderBottom: `1px solid ${BORDER}`, position: "relative", overflow: "hidden" }}>
+            <svg
+              style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: 60 }}
+              viewBox="0 0 760 60"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0 40 Q 40 10, 80 40 T 160 40 T 240 40 T 320 40 T 400 40 T 480 40 T 560 40 T 640 40 T 720 40 T 800 40"
+                stroke={BORDEAUX}
+                strokeWidth="3"
+                fill="none"
+                opacity=".35"
+              />
+            </svg>
+            <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 48px 60px", position: "relative", zIndex: 1 }}>
+              <div
+                style={{
+                  display: "inline-block",
+                  background: BORDEAUX,
+                  color: CREAM,
+                  fontSize: 12,
+                  fontWeight: 800,
+                  letterSpacing: "1px",
+                  textTransform: "uppercase",
+                  padding: "7px 16px",
+                  borderRadius: 4,
+                  marginBottom: 22,
+                  transform: "rotate(-1.5deg)",
+                }}
+              >
                 {t.hero.eyebrow}
               </div>
               <h1 style={{ fontSize: 68, lineHeight: 0.98, margin: "0 0 24px", fontWeight: 800, letterSpacing: "-1.5px", maxWidth: 820 }}>
-                {t.hero.subtitle}
+                {subtitleParts.before}
+                {subtitleParts.highlight && <span style={{ color: ACCENT }}>{subtitleParts.highlight}</span>}
+                {subtitleParts.after}
               </h1>
               <p style={{ fontSize: 18, lineHeight: 1.6, color: MUTED2, maxWidth: 560, margin: "0 0 32px" }}>{t.hero.lede}</p>
-              <div style={{ display: "flex", gap: 0, marginBottom: 20 }}>
+              <div style={{ display: "flex", gap: 12, marginBottom: 20 }}>
                 <a
                   href="#contact"
                   style={{
                     padding: "16px 32px",
                     background: ACCENT,
-                    color: "#101a13",
+                    color: ACCENT_TEXT,
+                    borderRadius: 4,
                     fontSize: 15,
                     fontWeight: 800,
                     fontFamily: "inherit",
@@ -106,8 +150,8 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                     padding: "16px 32px",
                     background: "transparent",
                     color: TEXT,
-                    border: `1px solid ${BORDER3}`,
-                    borderLeft: "none",
+                    border: `1.5px solid ${TEXT}`,
+                    borderRadius: 4,
                     fontSize: 15,
                     fontWeight: 800,
                     fontFamily: "inherit",
@@ -118,6 +162,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                   {t.hero.ctaSecondary}
                 </a>
               </div>
+              <div style={{ fontSize: 12.5, color: MUTED, fontWeight: 600 }}>{t.hero.availability}</div>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", maxWidth: 1200, margin: "0 auto" }}>
               {t.metrics.map((m, i) => (
@@ -148,7 +193,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                     alignItems: "center",
                     justifyContent: "center",
                     background: CARD,
-                    border: `1px dashed ${BORDER3}`,
+                    border: `1px dashed ${BORDER}`,
                     color: MUTED3,
                     fontSize: 13,
                   }}
@@ -169,7 +214,8 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                         fontWeight: 700,
                         padding: "6px 14px",
                         background: CARD,
-                        border: `1px solid ${BORDER2}`,
+                        border: `1px solid ${BORDER}`,
+                        borderRadius: 4,
                         color: TEXT,
                         textTransform: "uppercase",
                         letterSpacing: ".3px",
@@ -188,7 +234,15 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                   {t.about.sectors.map((sec, i) => (
                     <span
                       key={i}
-                      style={{ fontSize: 13, fontWeight: 600, padding: "8px 16px", background: CARD, border: `1px solid ${BORDER2}`, color: TEXT }}
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 600,
+                        padding: "8px 16px",
+                        background: CARD,
+                        border: `1px solid ${BORDER}`,
+                        borderRadius: 4,
+                        color: TEXT,
+                      }}
                     >
                       {sec}
                     </span>
@@ -203,7 +257,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                     fontFamily: "ui-monospace,Menlo,monospace",
                     color: MUTED3,
                     padding: "8px 16px",
-                    border: `1px dashed ${BORDER3}`,
+                    border: `1px dashed ${BORDER}`,
                   }}
                 >
                   {t.about.interestsPlaceholder}
@@ -240,7 +294,8 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                         alignItems: "center",
                         justifyContent: "center",
                         background: CARD,
-                        border: `1px solid ${BORDER2}`,
+                        border: `1px solid ${BORDER}`,
+                        borderRadius: 4,
                       }}
                     >
                       <ServiceIcon index={i} />
@@ -292,8 +347,9 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                     style={{
                       padding: "16px 26px",
                       background: ACCENT,
-                      color: "#101a13",
+                      color: ACCENT_TEXT,
                       border: "none",
+                      borderRadius: 4,
                       fontSize: 15,
                       fontWeight: 800,
                       cursor: "pointer",
@@ -306,7 +362,9 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                   </button>
                 </form>
               ) : (
-                <div style={{ background: CARD, border: `1px solid ${BORDER2}`, padding: 28, fontSize: 15, color: TEXT }}>{t.contact.thanks}</div>
+                <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 4, padding: 28, fontSize: 15, color: TEXT }}>
+                  {t.contact.thanks}
+                </div>
               )}
             </div>
             <div style={{ padding: "20px 48px", textAlign: "center", fontSize: 12, color: MUTED, borderTop: `1px solid ${BORDER}` }}>{t.footer}</div>
@@ -344,7 +402,8 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                 alignItems: "center",
                 justifyContent: "center",
                 background: CARD,
-                border: `1px solid ${BORDER2}`,
+                border: `1px solid ${BORDER}`,
+                borderRadius: 4,
               }}
             >
               <ServiceIcon index={activeService as number} size={30} />
@@ -388,7 +447,8 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
               marginTop: 36,
               padding: "16px 32px",
               background: ACCENT,
-              color: "#101a13",
+              color: ACCENT_TEXT,
+              borderRadius: 4,
               fontSize: 15,
               fontWeight: 800,
               fontFamily: "inherit",
@@ -424,7 +484,8 @@ const sectionLabelStyle: React.CSSProperties = {
 const inputStyle: React.CSSProperties = {
   padding: 14,
   background: CARD,
-  border: `1px solid ${BORDER2}`,
+  border: `1px solid ${BORDER}`,
+  borderRadius: 4,
   color: TEXT,
   fontSize: 14,
   fontFamily: "inherit",
@@ -435,6 +496,6 @@ const detailHeadingStyle: React.CSSProperties = {
   fontWeight: 700,
   textTransform: "uppercase",
   letterSpacing: ".4px",
-  color: "#A6F236",
+  color: ACCENT,
   margin: "0 0 14px",
 };
