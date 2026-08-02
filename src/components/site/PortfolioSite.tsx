@@ -15,7 +15,7 @@ const TEXT = "#233024";
 const MUTED = "#6b7a68";
 const MUTED2 = "#546b50";
 
-const HIGHLIGHT_PHRASES = ["Data & IA", "Data & AI"];
+const HIGHLIGHT_PHRASES = ["Building AI", "Data & IA", "Data & AI"];
 
 function splitHighlight(text: string) {
   const lower = text.toLowerCase();
