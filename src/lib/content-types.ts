@@ -5,6 +5,7 @@ export type Service = {
   audienceLabel: string;
   audience: string;
   problem: string;
+  skills: string[];
   whatIDo: string[];
   whatYouGet: string[];
 };
@@ -13,7 +14,8 @@ export type ExperienceItem = {
   company: string;
   role: string;
   period: string;
-  desc: string;
+  summary?: string;
+  highlights: string[];
 };
 
 export type LangContent = {
@@ -35,7 +37,7 @@ export type LangContent = {
     sectorsTitle: string;
     sectors: string[];
     interestsTitle: string;
-    interestsPlaceholder: string;
+    interests: string[];
   };
   services: {
     hint: string;

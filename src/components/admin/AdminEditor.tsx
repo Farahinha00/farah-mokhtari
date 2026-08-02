@@ -201,10 +201,10 @@ export function AdminEditor({ initialContent }: { initialContent: SiteContent })
             value={t.about.interestsTitle}
             onChange={(v) => updateLang((c) => ({ ...c, about: { ...c.about, interestsTitle: v } }))}
           />
-          <TextField
-            label="Placeholder centres d'intérêt"
-            value={t.about.interestsPlaceholder}
-            onChange={(v) => updateLang((c) => ({ ...c, about: { ...c.about, interestsPlaceholder: v } }))}
+          <StringListField
+            label="Centres d'intérêt"
+            values={t.about.interests}
+            onChange={(v) => updateLang((c) => ({ ...c, about: { ...c.about, interests: v } }))}
           />
         </Section>
 
@@ -294,6 +294,17 @@ export function AdminEditor({ initialContent }: { initialContent: SiteContent })
                 }
               />
               <StringListField
+                label="Compétences clés (tags)"
+                values={s.skills}
+                onChange={(v) =>
+                  updateLang((c) => {
+                    const list = c.services.list.slice();
+                    list[i] = { ...list[i], skills: v };
+                    return { ...c, services: { ...c.services, list } };
+                  })
+                }
+              />
+              <StringListField
                 label="Ce que je fais concrètement"
                 values={s.whatIDo}
                 onChange={(v) =>
@@ -326,7 +337,7 @@ export function AdminEditor({ initialContent }: { initialContent: SiteContent })
                   ...c.services,
                   list: [
                     ...c.services.list,
-                    { title: "", audienceLabel: "", audience: "", problem: "", whatIDo: [], whatYouGet: [] },
+                    { title: "", audienceLabel: "", audience: "", problem: "", skills: [], whatIDo: [], whatYouGet: [] },
                   ],
                 },
               }))
@@ -386,13 +397,24 @@ export function AdminEditor({ initialContent }: { initialContent: SiteContent })
                 }
               />
               <TextAreaField
-                label="Description"
+                label="Résumé (optionnel)"
                 rows={2}
-                value={e.desc}
+                value={e.summary ?? ""}
                 onChange={(v) =>
                   updateLang((c) => {
                     const experience = c.experience.slice();
-                    experience[i] = { ...experience[i], desc: v };
+                    experience[i] = { ...experience[i], summary: v };
+                    return { ...c, experience };
+                  })
+                }
+              />
+              <StringListField
+                label="Points clés"
+                values={e.highlights}
+                onChange={(v) =>
+                  updateLang((c) => {
+                    const experience = c.experience.slice();
+                    experience[i] = { ...experience[i], highlights: v };
                     return { ...c, experience };
                   })
                 }
@@ -404,7 +426,7 @@ export function AdminEditor({ initialContent }: { initialContent: SiteContent })
             onClick={() =>
               updateLang((c) => ({
                 ...c,
-                experience: [...c.experience, { company: "", role: "", period: "", desc: "" }],
+                experience: [...c.experience, { company: "", role: "", period: "", highlights: [] }],
               }))
             }
             className="text-xs font-semibold text-zinc-600 hover:text-zinc-900"

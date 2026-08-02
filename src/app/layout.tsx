@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Farah Mokhtari — Product Leader Data & IA",
+  title: "Farah Mokhtari — Senior Product Manager · AI & Data Product Manager",
   description:
-    "Product Leader freelance spécialisée Data & IA — pilotage produit, gouvernance data, agents IA et automatisation.",
+    "Product Owner freelance à Paris, spécialisée en product strategy, product roadmap et agile methodology (Scrum) — missions AI product manager et data product manager pour produits SaaS, B2C et B2B, avec expertise en product design et user experience design.",
 };
 
 export default function RootLayout({

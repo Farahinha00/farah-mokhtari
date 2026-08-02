@@ -14,15 +14,15 @@ const CREAM = "#F2EADD";
 const TEXT = "#233024";
 const MUTED = "#6b7a68";
 const MUTED2 = "#546b50";
-const MUTED3 = "#7d8a79";
 
 const HIGHLIGHT_PHRASES = ["Data & IA", "Data & AI"];
 
 function splitHighlight(text: string) {
+  const lower = text.toLowerCase();
   for (const phrase of HIGHLIGHT_PHRASES) {
-    const idx = text.indexOf(phrase);
+    const idx = lower.indexOf(phrase.toLowerCase());
     if (idx !== -1) {
-      return { before: text.slice(0, idx), highlight: phrase, after: text.slice(idx + phrase.length) };
+      return { before: text.slice(0, idx), highlight: text.slice(idx, idx + phrase.length), after: text.slice(idx + phrase.length) };
     }
   }
   return { before: text, highlight: null as string | null, after: "" };
@@ -32,6 +32,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
   const [lang, setLang] = useState<Lang>("fr");
   const [activeService, setActiveService] = useState<number | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [expandedExperience, setExpandedExperience] = useState<number | null>(null);
 
   const t = content[lang];
   const services = t.services.list;
@@ -183,24 +184,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
           </div>
 
           <div id="about" style={{ borderBottom: `1px solid ${BORDER}` }}>
-            <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 48px", display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: 48 }}>
-              <div style={{ position: "relative" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: 340,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: CARD,
-                    border: `1px dashed ${BORDER}`,
-                    color: MUTED3,
-                    fontSize: 13,
-                  }}
-                >
-                  Photo profil
-                </div>
-              </div>
+            <div style={{ maxWidth: 900, margin: "0 auto", padding: "80px 48px" }}>
               <div>
                 <h2 style={{ fontSize: 32, margin: "0 0 24px", fontWeight: 800, letterSpacing: "-1px" }}>{t.about.title}</h2>
                 <p style={{ fontSize: 16, lineHeight: 1.7, color: MUTED2, margin: "0 0 16px" }}>{t.about.p1}</p>
@@ -251,16 +235,23 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
               </div>
               <div>
                 <h3 style={sectionLabelStyle}>{t.about.interestsTitle}</h3>
-                <div
-                  style={{
-                    fontSize: 13,
-                    fontFamily: "ui-monospace,Menlo,monospace",
-                    color: MUTED3,
-                    padding: "8px 16px",
-                    border: `1px dashed ${BORDER}`,
-                  }}
-                >
-                  {t.about.interestsPlaceholder}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {t.about.interests.map((interest, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 600,
+                        padding: "8px 16px",
+                        background: CARD,
+                        border: `1px solid ${BORDER}`,
+                        borderRadius: 4,
+                        color: TEXT,
+                      }}
+                    >
+                      {interest}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -302,7 +293,25 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                     </div>
                     <div>
                       <h3 style={{ fontSize: 20, margin: "0 0 10px", fontWeight: 800 }}>{s.title}</h3>
-                      <p style={{ fontSize: 14, lineHeight: 1.6, color: MUTED2, margin: 0, maxWidth: 680 }}>{s.problem}</p>
+                      <p style={{ fontSize: 14, lineHeight: 1.6, color: MUTED2, margin: "0 0 12px", maxWidth: 680 }}>{s.problem}</p>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                        {s.skills.map((skill, si) => (
+                          <span
+                            key={si}
+                            style={{
+                              fontSize: 11,
+                              fontWeight: 700,
+                              padding: "4px 10px",
+                              background: CARD,
+                              border: `1px solid ${BORDER}`,
+                              borderRadius: 4,
+                              color: MUTED,
+                            }}
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     <div style={{ fontSize: 20, fontWeight: 700, color: ACCENT, lineHeight: 1, textAlign: "center" }}>→</div>
                   </div>
@@ -315,17 +324,44 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
             <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 48px" }}>
               <h2 style={{ fontSize: 32, margin: "0 0 32px", fontWeight: 800, letterSpacing: "-1px" }}>{t.nav.experience}</h2>
               <div style={{ display: "flex", flexDirection: "column" }}>
-                {t.experience.map((e, i) => (
-                  <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 24, padding: "18px 0", borderBottom: `1px solid ${BORDER}` }}>
-                    <div style={{ fontSize: 15, fontWeight: 800, color: ACCENT }}>{e.period}</div>
-                    <div>
-                      <div style={{ fontSize: 16, fontWeight: 800 }}>
-                        {e.role} — {e.company}
+                {t.experience.map((e, i) => {
+                  const expanded = expandedExperience === i;
+                  return (
+                    <div key={i} style={{ borderBottom: `1px solid ${BORDER}` }}>
+                      <div
+                        onClick={() => setExpandedExperience(expanded ? null : i)}
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "120px 1fr 20px",
+                          gap: 24,
+                          padding: "18px 0",
+                          cursor: "pointer",
+                          alignItems: "start",
+                        }}
+                      >
+                        <div style={{ fontSize: 15, fontWeight: 800, color: ACCENT }}>{e.period}</div>
+                        <div style={{ fontSize: 16, fontWeight: 800 }}>
+                          {e.role} — {e.company}
+                        </div>
+                        <div style={{ fontSize: 16, fontWeight: 700, color: ACCENT, textAlign: "center" }}>{expanded ? "−" : "+"}</div>
                       </div>
-                      <div style={{ fontSize: 14, color: MUTED, marginTop: 4, lineHeight: 1.6 }}>{e.desc}</div>
+                      {expanded && (
+                        <div style={{ padding: "0 0 24px 144px" }}>
+                          {e.summary && (
+                            <p style={{ fontSize: 14, lineHeight: 1.6, color: MUTED2, margin: "0 0 12px" }}>{e.summary}</p>
+                          )}
+                          <ul style={{ margin: 0, padding: "0 0 0 18px", display: "flex", flexDirection: "column", gap: 8 }}>
+                            {e.highlights.map((h, hi) => (
+                              <li key={hi} style={{ fontSize: 14, lineHeight: 1.6, color: MUTED }}>
+                                {h}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -410,7 +446,25 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
             </div>
             <h1 style={{ fontSize: 32, margin: 0, fontWeight: 800, letterSpacing: "-1px" }}>{active.title}</h1>
           </div>
-          <p style={{ fontSize: 17, lineHeight: 1.6, color: MUTED2, margin: "0 0 36px", maxWidth: 760 }}>{active.problem}</p>
+          <p style={{ fontSize: 17, lineHeight: 1.6, color: MUTED2, margin: "0 0 24px", maxWidth: 760 }}>{active.problem}</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "0 0 32px" }}>
+            {active.skills.map((skill, si) => (
+              <span
+                key={si}
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  padding: "6px 14px",
+                  background: CARD,
+                  border: `1px solid ${BORDER}`,
+                  borderRadius: 4,
+                  color: TEXT,
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
           <div style={{ margin: "0 0 32px" }}>
             <div style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".4px", color: ACCENT, margin: "0 0 8px" }}>
               {active.audienceLabel}

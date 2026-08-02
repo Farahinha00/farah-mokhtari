@@ -5,7 +5,8 @@ export const DEFAULT_CONTENT: SiteContent = {
     nav: { about: "À propos", services: "Services", experience: "Parcours", contact: "Contact" },
     hero: {
       eyebrow: "Freelance · Product Leadership",
-      subtitle: "Product Leader spécialisée Data & IA",
+      subtitle:
+        "Product Leader — stratégie, discovery et delivery pour des produits SaaS, B2C et B2B, avec une vraie pratique de la data et de l'IA.",
       lede: "J'aide les entreprises SaaS, B2B et B2C à structurer leur produit, leur data et leurs équipes — de la stratégie à la mise en production.",
       ctaPrimary: "Discuter de mon projet",
       ctaSecondary: "Voir le parcours",
@@ -20,12 +21,12 @@ export const DEFAULT_CONTENT: SiteContent = {
     about: {
       title: "Apprendre à me connaître",
       p1: "Ingénieure de formation (Télécom SudParis), j'ai construit ma carrière autour d'un fil rouge : transformer des données complexes et des organisations en produits qui créent de la valeur — chez Renault, MSD, Openclassrooms ou Europcar.",
-      p2: "Française et marocaine, basée à Paris, je travaille couramment en anglais et j'apprends l'IA en continu (diplôme Openclassrooms). Ce qui me motive : le terrain, les équipes, et les résultats mesurables.",
-      values: ["Rigueur", "Impact mesurable", "Leadership bienveillant", "Curiosité IA"],
+      p2: "Française et marocaine, basée à Paris, je travaille couramment en anglais et j'apprends l'IA en continu (diplôme Openclassrooms). En tant que Senior Product Manager et Product Owner, j'allie stratégie produit, product roadmap, discovery, méthodologie agile (Scrum), product design et user experience design, avec un vrai sens du management d'équipe. Ce qui me motive : le terrain, les équipes, et les résultats mesurables.",
+      values: ["Rigueur", "Impact mesurable", "Leadership bienveillant", "Curiosité IA", "Product Ops"],
       sectorsTitle: "Secteurs d'activité",
       sectors: ["Automobile & mobilité", "Santé & pharma", "EdTech", "SaaS & cybersécurité", "Médias"],
       interestsTitle: "Centres d'intérêt",
-      interestsPlaceholder: "à compléter — dites-moi vos centres d'intérêt",
+      interests: ["Sport", "Voyages", "Musique"],
     },
     services: {
       hint: "Cliquez sur un service pour voir le détail.",
@@ -36,8 +37,10 @@ export const DEFAULT_CONTENT: SiteContent = {
         {
           title: "Pilotage de produits Data & IA",
           audienceLabel: "Pour qui",
-          audience: "Entreprises qui ont des projets data ou IA critiques, mais pas de Product Manager expérimenté pour les porter de bout en bout.",
+          audience:
+            "Entreprises qui ont des projets data ou IA critiques, mais pas de Product Manager expérimenté (AI Product Manager ou Data Product Manager) pour les porter de bout en bout.",
           problem: "Vos initiatives data/IA restent bloquées entre les équipes techniques, la direction et les métiers — personne n'a la vision complète ni l'autorité pour trancher et faire avancer.",
+          skills: ["Gouvernance de la donnée", "Qualité des données", "Conformité", "Pilotage par la donnée", "Gestion des parties prenantes"],
           whatIDo: [
             "Cadrage des besoins et définition de la roadmap produit",
             "Gouvernance data opérationnelle (propriétaires, règles de qualité, priorisation)",
@@ -57,10 +60,11 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Pour qui",
           audience: "Entreprises qui lancent ou font évoluer un produit — B2C ou B2B, site web, application, SaaS ou software — mais manquent d'un Product Manager capable de porter la vision de bout en bout.",
           problem: "Votre produit avance sans réelle vision, ou les priorités changent en permanence faute d'une roadmap claire ancrée dans les besoins utilisateurs et les objectifs business.",
+          skills: ["Stratégie produit", "Product Roadmap", "Discovery", "Méthodologie Agile", "Product Owner"],
           whatIDo: [
             "Définition de la stratégie et de la roadmap produit, du MVP aux itérations orientées marché",
-            "Discovery utilisateur (entretiens, tests, analyse data) pour ancrer les décisions dans le réel",
-            "Animation du backlog et pilotage du cycle discovery → delivery",
+            "Discovery utilisateur et user experience design (entretiens, tests, analyse data) pour ancrer les décisions dans le réel",
+            "Animation du backlog et pilotage du cycle discovery → delivery en méthodologie Agile (Scrum)",
             "Management ou coordination d'une équipe produit",
             "Alignement transverse",
           ],
@@ -76,6 +80,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Pour qui",
           audience: "Entreprises menant un projet de transformation digitale complexe — lancement de produit, migration de système, mise en conformité réglementaire — souvent à l'international.",
           problem: "Ces projets touchent plusieurs pays, plusieurs équipes, et des contraintes réglementaires strictes (ex. facturation électronique). Sans pilotage rigoureux, les délais et la qualité en pâtissent.",
+          skills: ["Gestion de projet", "Migration de données", "SAP", "Facturation électronique", "Déploiement international"],
           whatIDo: [
             "Cadrage des besoins, découpage en lots, définition des jalons",
             "Pilotage de migrations de données (migration SAP, refonte de systèmes)",
@@ -95,6 +100,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Pour qui",
           audience: "PME et entreprises qui veulent automatiser des tâches répétitives ou intégrer l'IA à leurs process, sans recruter une équipe data science.",
           problem: "Vous savez que l'IA peut vous faire gagner du temps, mais vous ne savez pas par où commencer, ni comment construire quelque chose de fiable et adapté à votre activité.",
+          skills: ["Agents IA", "Automatisation", "n8n", "Make", "Dust"],
           whatIDo: [
             "Identification des cas d'usage à plus fort impact (support, ventes, reporting, back-office)",
             "Construction d'agents et de workflows automatisés (n8n, Make, Dust)",
@@ -112,6 +118,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Pour qui",
           audience: "Entreprises qui veulent digitaliser une partie de leur relation client ou de leurs ventes (renseignement produit, prise de commande, génération de leads).",
           problem: "Vos clients veulent des réponses immédiates et personnalisées, mais votre équipe commerciale ne peut pas être disponible partout, tout le temps.",
+          skills: ["IA conversationnelle", "API Claude", "Génération de leads", "Architecture chatbot"],
           whatIDo: [
             "Conception de l'expérience conversationnelle et des parcours client",
             "Développement de l'architecture complète : backend, intégration IA, panel d'administration",
@@ -130,6 +137,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Pour qui",
           audience: "Entreprises traditionnelles qui veulent adopter l'IA mais ne savent pas par où commencer ni ce qui est réellement pertinent pour elles.",
           problem: "L'IA est partout dans les discours, mais peu d'entreprises ont une vision claire de ce qu'elles peuvent réellement en tirer, avec quel investissement et quel retour.",
+          skills: ["Stratégie IA", "Faisabilité technique", "Roadmap IA", "Make or Buy"],
           whatIDo: [
             "Audit de vos process et identification des cas d'usage IA à fort potentiel",
             "Évaluation réaliste : faisabilité technique, coût, impact attendu",
@@ -145,10 +153,49 @@ export const DEFAULT_CONTENT: SiteContent = {
       ],
     },
     experience: [
-      { company: "Europcar Mobility Group", role: "Principal Data & AI Product Expert", period: "2024 – 2025", desc: "Migration SAP, gouvernance data et dashboards exécutifs." },
-      { company: "Openclassrooms", role: "Staff Solution Manager", period: "2021 – 2023", desc: "Initiatives produit B2C/B2B : -15 pts de churn, 125K€/an économisés." },
-      { company: "Olfeo", role: "Lead Product", period: "2020 – 2021", desc: "Lancement d'un SaaS cybersécurité de 0 à 1, équipe de 4 personnes." },
-      { company: "Renault", role: "Configurator Product Manager", period: "2017 – 2020", desc: "Configurateur véhicule dans 10+ pays, conversion x2,8." },
+      {
+        company: "Europcar Mobility Group",
+        role: "Principal Data & AI Product Expert",
+        period: "2024 – 2025",
+        highlights: ["Migration SAP multi-pays et multi-marques", "Facturation électronique BE et FR"],
+      },
+      {
+        company: "Openclassrooms",
+        role: "Staff Solution Manager",
+        period: "2021 – 2023",
+        highlights: [
+          "Structuration Product Ops : rituels, process et gouvernance transverse",
+          "Mise en place de la visio-conférence",
+          "Digitalisation du parcours diplômes",
+          "Marketplace apprentis-recruteurs",
+          "Revamp de l'app iOS",
+          "POC IA pour améliorer l'apprentissage",
+        ],
+      },
+      {
+        company: "Olfeo",
+        role: "Lead Product",
+        period: "2020 – 2021",
+        highlights: ["Produit SaaS de cybersécurité en Cloud souverain, lancé de zéro au MVP en 7 mois"],
+      },
+      {
+        company: "Renault",
+        role: "Configurator Product Manager",
+        period: "2017 – 2020",
+        highlights: ["Configurateurs véhicules EV et LCV, déployés dans plus de 10 pays"],
+      },
+      {
+        company: "MSD / Aptus Health, Paris",
+        role: "Product Owner",
+        period: "09/2014 – 12/2016",
+        summary: "Pilotage du CMS éditorial d'Univadis, plateforme de distribution de contenus médicaux multi-marchés.",
+        highlights: [
+          "Co-construction et ownership de la roadmap produit, priorisation du backlog en approche data-informed",
+          "Animation des rituels agile et des ateliers de conception avec les équipes tech, UX, Marketing et Data",
+          "Delivery cross-fonctionnelle et communication aux sponsors sur l'avancement et les plans de correction",
+          "Pilotage de l'adoption multi-marchés et du déploiement de la plateforme en conformité avec les standards qualité",
+        ],
+      },
     ],
     contact: {
       title: "Travaillons ensemble",
@@ -167,7 +214,8 @@ export const DEFAULT_CONTENT: SiteContent = {
     nav: { about: "About", services: "Services", experience: "Experience", contact: "Contact" },
     hero: {
       eyebrow: "Freelance · Product Leadership",
-      subtitle: "Product Leader specialized in Data & AI",
+      subtitle:
+        "Product Leader — strategy, discovery, and delivery for SaaS, B2C, and B2B products, with hands-on expertise in data & AI.",
       lede: "I help SaaS, B2B and B2C companies structure their product, data and teams — from strategy to production.",
       ctaPrimary: "Discuss your project",
       ctaSecondary: "See my track record",
@@ -182,12 +230,12 @@ export const DEFAULT_CONTENT: SiteContent = {
     about: {
       title: "Get to know me",
       p1: "Trained as an engineer (Télécom SudParis), I've built my career around one thread: turning complex data and organizations into products that create value — at Renault, MSD, Openclassrooms and Europcar.",
-      p2: "French-Moroccan, based in Paris, fluent in English, and continuously learning AI (Openclassrooms diploma). What drives me: being hands-on, working with teams, and measurable results.",
-      values: ["Rigor", "Measurable impact", "Caring leadership", "AI curiosity"],
+      p2: "French-Moroccan, based in Paris, fluent in English, and continuously learning AI (Openclassrooms diploma). As a Senior Product Manager and Product Owner, I combine product strategy, product roadmap, discovery, agile methodology (Scrum), product design and user experience design, with hands-on team management. What drives me: being hands-on, working with teams, and measurable results.",
+      values: ["Rigor", "Measurable impact", "Caring leadership", "AI curiosity", "Product Ops"],
       sectorsTitle: "Industries",
       sectors: ["Automotive & mobility", "Health & pharma", "EdTech", "SaaS & cybersecurity", "Media"],
       interestsTitle: "Interests",
-      interestsPlaceholder: "to fill in — tell me your interests",
+      interests: ["Sport", "Travel", "Music"],
     },
     services: {
       hint: "Click a service to see the detail.",
@@ -198,8 +246,10 @@ export const DEFAULT_CONTENT: SiteContent = {
         {
           title: "Data & AI product leadership",
           audienceLabel: "Who it's for",
-          audience: "Companies with critical data or AI initiatives, but no experienced Product Manager to drive them end-to-end.",
+          audience:
+            "Companies with critical data or AI initiatives, but no experienced Product Manager (AI Product Manager or Data Product Manager) to drive them end-to-end.",
           problem: "Your data/AI initiatives stay stuck between tech teams, leadership and the business — no one holds the full picture or the authority to decide and move forward.",
+          skills: ["Data Governance", "Data Quality", "Compliance", "Data-Driven Decision Making", "Stakeholder Management"],
           whatIDo: [
             "Scoping needs and defining the product roadmap",
             "Operational data governance (owners, quality rules, prioritization)",
@@ -219,10 +269,11 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Who it's for",
           audience: "Companies launching or evolving a product — B2C or B2B, website, app, SaaS or software — but lacking a Product Manager able to own the vision end-to-end.",
           problem: "Your product moves forward without real vision, or priorities keep shifting for lack of a roadmap anchored in user needs and business goals.",
+          skills: ["Product Strategy", "Product Roadmap", "Discovery", "Agile Methodology", "Product Owner"],
           whatIDo: [
             "Product strategy and roadmap, from MVP to market-driven iterations",
-            "User discovery (interviews, testing, data analysis) to ground decisions in reality",
-            "Backlog management and steering the discovery → delivery cycle",
+            "User discovery and user experience design (interviews, testing, data analysis) to ground decisions in reality",
+            "Backlog management and steering the discovery → delivery cycle using Agile methodology (Scrum)",
             "Managing or coordinating a product team",
             "Cross-team alignment",
           ],
@@ -238,6 +289,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Who it's for",
           audience: "Companies running a complex digital transformation project — product launch, system migration, regulatory compliance — often international.",
           problem: "These projects span several countries, teams, and strict regulatory constraints (e.g. e-invoicing). Without rigorous leadership, timelines and quality suffer.",
+          skills: ["Project Management", "Data Migration", "SAP", "E-invoicing", "International Rollout"],
           whatIDo: [
             "Scoping needs, breaking down into workstreams, defining milestones",
             "Leading data migrations (SAP migration, system overhauls)",
@@ -257,6 +309,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Who it's for",
           audience: "SMBs and companies wanting to automate repetitive tasks or bring AI into their process, without hiring a data science team.",
           problem: "You know AI could save you time, but you don't know where to start or how to build something reliable and fit for your business.",
+          skills: ["AI Agents", "Automation", "n8n", "Make", "Dust"],
           whatIDo: [
             "Identifying the highest-impact use cases (support, sales, reporting, back-office)",
             "Building agents and automated workflows (n8n, Make, Dust)",
@@ -274,6 +327,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Who it's for",
           audience: "Companies wanting to digitalize part of their customer relationship or sales (product info, order taking, lead generation).",
           problem: "Your customers want instant, personalized answers, but your sales team can't be everywhere, all the time.",
+          skills: ["Conversational AI", "Claude API", "Lead Generation", "Chatbot Architecture"],
           whatIDo: [
             "Designing the conversational experience and customer journeys",
             "Building the full architecture: backend, AI integration, admin panel",
@@ -292,6 +346,7 @@ export const DEFAULT_CONTENT: SiteContent = {
           audienceLabel: "Who it's for",
           audience: "Traditional companies wanting to adopt AI but unsure where to start or what's actually relevant for them.",
           problem: "AI is everywhere in the conversation, but few companies have a clear view of what they can really get from it, at what cost and return.",
+          skills: ["AI Strategy", "Technical Feasibility", "AI Roadmap", "Make or Buy"],
           whatIDo: [
             "Auditing your processes and identifying high-potential AI use cases",
             "Realistic assessment: technical feasibility, cost, expected impact",
@@ -307,10 +362,49 @@ export const DEFAULT_CONTENT: SiteContent = {
       ],
     },
     experience: [
-      { company: "Europcar Mobility Group", role: "Principal Data & AI Product Expert", period: "2024 – 2025", desc: "SAP migration, data governance and executive dashboards." },
-      { company: "Openclassrooms", role: "Staff Solution Manager", period: "2021 – 2023", desc: "B2C/B2B product initiatives: -15 pts churn, €125K/yr saved." },
-      { company: "Olfeo", role: "Lead Product", period: "2020 – 2021", desc: "Launched a cybersecurity SaaS from zero to one, led a team of 4." },
-      { company: "Renault", role: "Configurator Product Manager", period: "2017 – 2020", desc: "Vehicle configurator in 10+ countries, conversion x2.8." },
+      {
+        company: "Europcar Mobility Group",
+        role: "Principal Data & AI Product Expert",
+        period: "2024 – 2025",
+        highlights: ["Multi-country, multi-brand SAP migration", "E-invoicing rollout in Belgium and France"],
+      },
+      {
+        company: "Openclassrooms",
+        role: "Staff Solution Manager",
+        period: "2021 – 2023",
+        highlights: [
+          "Structured Product Ops: rituals, process and cross-team governance",
+          "Rolled out video-conferencing",
+          "Digitalized the diploma journey",
+          "Apprentices–recruiters marketplace",
+          "iOS app revamp",
+          "AI proof-of-concept to improve learning outcomes",
+        ],
+      },
+      {
+        company: "Olfeo",
+        role: "Lead Product",
+        period: "2020 – 2021",
+        highlights: ["Sovereign-cloud cybersecurity SaaS product, launched from zero to MVP in 7 months"],
+      },
+      {
+        company: "Renault",
+        role: "Configurator Product Manager",
+        period: "2017 – 2020",
+        highlights: ["EV and LCV vehicle configurators, rolled out in 10+ countries"],
+      },
+      {
+        company: "MSD / Aptus Health, Paris",
+        role: "Product Owner",
+        period: "09/2014 – 12/2016",
+        summary: "Led the editorial CMS for Univadis, a multi-market medical content distribution platform.",
+        highlights: [
+          "Co-built and owned the product roadmap, prioritizing the backlog with a data-informed approach",
+          "Ran agile rituals and design workshops with Tech, UX, Marketing, and Data teams",
+          "Cross-functional delivery and stakeholder communication on progress and corrective plans",
+          "Led multi-market adoption and platform rollout in line with quality standards",
+        ],
+      },
     ],
     contact: {
       title: "Let's work together",
