@@ -14,8 +14,9 @@ const CREAM = "#F2EADD";
 const TEXT = "#233024";
 const MUTED = "#6b7a68";
 const MUTED2 = "#546b50";
+const DARK_GREEN = "#1f4d2e";
 
-const HIGHLIGHT_PHRASES = ["Building AI", "Data & IA", "Data & AI"];
+const HIGHLIGHT_PHRASES = ["Data & IA", "Data & AI"];
 
 function splitHighlight(text: string) {
   const lower = text.toLowerCase();
@@ -28,6 +29,26 @@ function splitHighlight(text: string) {
   return { before: text, highlight: null as string | null, after: "" };
 }
 
+function renderHeroTitle(text: string) {
+  if (text.trim().toLowerCase() === "product leader building ai") {
+    return (
+      <>
+        Product Leader
+        <br />
+        <span style={{ color: DARK_GREEN }}>Building</span> <span style={{ color: ACCENT }}>AI</span>
+      </>
+    );
+  }
+  const parts = splitHighlight(text);
+  return (
+    <>
+      {parts.before}
+      {parts.highlight && <span style={{ color: ACCENT }}>{parts.highlight}</span>}
+      {parts.after}
+    </>
+  );
+}
+
 export function PortfolioSite({ content }: { content: SiteContent }) {
   const [lang, setLang] = useState<Lang>("fr");
   const [activeService, setActiveService] = useState<number | null>(null);
@@ -37,7 +58,6 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
   const t = content[lang];
   const services = t.services.list;
   const active = activeService !== null ? services[activeService] : null;
-  const subtitleParts = splitHighlight(t.hero.subtitle);
 
   function goHome() {
     setActiveService(null);
@@ -123,9 +143,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                 {t.hero.eyebrow}
               </div>
               <h1 style={{ fontSize: 68, lineHeight: 0.98, margin: "0 0 24px", fontWeight: 800, letterSpacing: "-1.5px", maxWidth: 820 }}>
-                {subtitleParts.before}
-                {subtitleParts.highlight && <span style={{ color: ACCENT }}>{subtitleParts.highlight}</span>}
-                {subtitleParts.after}
+                {renderHeroTitle(t.hero.subtitle)}
               </h1>
               <p style={{ fontSize: 18, lineHeight: 1.6, color: MUTED2, maxWidth: 560, margin: "0 0 32px" }}>{t.hero.lede}</p>
               <div style={{ display: "flex", gap: 12, marginBottom: 20 }}>
