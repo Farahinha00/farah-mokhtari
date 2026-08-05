@@ -14,39 +14,24 @@ const CREAM = "#F2EADD";
 const TEXT = "#233024";
 const MUTED = "#6b7a68";
 const MUTED2 = "#546b50";
-const DARK_GREEN = "#1f4d2e";
 
-const HIGHLIGHT_PHRASES = ["Data & IA", "Data & AI"];
-
-function splitHighlight(text: string) {
-  const lower = text.toLowerCase();
-  for (const phrase of HIGHLIGHT_PHRASES) {
-    const idx = lower.indexOf(phrase.toLowerCase());
-    if (idx !== -1) {
-      return { before: text.slice(0, idx), highlight: text.slice(idx, idx + phrase.length), after: text.slice(idx + phrase.length) };
+/**
+ * Renders text wrapped in **double asterisks** as emerald-highlighted spans,
+ * so editors can control highlighting from the admin panel without code changes.
+ */
+function renderHighlightedText(text: string) {
+  const segments = text.split(/(\*\*[^*]+\*\*)/g);
+  return segments.map((segment, i) => {
+    const match = segment.match(/^\*\*([^*]+)\*\*$/);
+    if (match) {
+      return (
+        <span key={i} style={{ color: ACCENT }}>
+          {match[1]}
+        </span>
+      );
     }
-  }
-  return { before: text, highlight: null as string | null, after: "" };
-}
-
-function renderHeroTitle(text: string) {
-  if (text.trim().toLowerCase() === "product leader building ai") {
-    return (
-      <>
-        Product Leader
-        <br />
-        <span style={{ color: DARK_GREEN }}>Building</span> <span style={{ color: ACCENT }}>AI</span>
-      </>
-    );
-  }
-  const parts = splitHighlight(text);
-  return (
-    <>
-      {parts.before}
-      {parts.highlight && <span style={{ color: ACCENT }}>{parts.highlight}</span>}
-      {parts.after}
-    </>
-  );
+    return segment;
+  });
 }
 
 export function PortfolioSite({ content }: { content: SiteContent }) {
@@ -143,7 +128,7 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                 {t.hero.eyebrow}
               </div>
               <h1 style={{ fontSize: 68, lineHeight: 0.98, margin: "0 0 24px", fontWeight: 800, letterSpacing: "-1.5px", maxWidth: 820 }}>
-                {renderHeroTitle(t.hero.subtitle)}
+                {renderHighlightedText(t.hero.subtitle)}
               </h1>
               <p style={{ fontSize: 18, lineHeight: 1.6, color: MUTED2, maxWidth: 560, margin: "0 0 32px" }}>{t.hero.lede}</p>
               <div style={{ display: "flex", gap: 12, marginBottom: 20 }}>

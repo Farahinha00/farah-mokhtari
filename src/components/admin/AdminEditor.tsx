@@ -104,6 +104,9 @@ export function AdminEditor({ initialContent }: { initialContent: SiteContent })
         <Section title="Hero">
           <TextField label="Eyebrow" value={t.hero.eyebrow} onChange={(v) => updateLang((c) => ({ ...c, hero: { ...c.hero, eyebrow: v } }))} />
           <TextField label="Titre" value={t.hero.subtitle} onChange={(v) => updateLang((c) => ({ ...c, hero: { ...c.hero, subtitle: v } }))} />
+          <p className="-mt-3 mb-4 text-xs text-zinc-500">
+            Astuce : entourez une partie du texte avec **deux astérisques** pour l&apos;afficher en vert émeraude, ex. Product Leader spécialisée **Data &amp; IA**.
+          </p>
           <TextAreaField label="Texte d'intro" value={t.hero.lede} onChange={(v) => updateLang((c) => ({ ...c, hero: { ...c.hero, lede: v } }))} />
           <div className="grid grid-cols-2 gap-x-4">
             <TextField

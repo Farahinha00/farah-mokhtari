@@ -5,7 +5,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     nav: { about: "À propos", services: "Services", experience: "Parcours", contact: "Contact" },
     hero: {
       eyebrow: "Freelance · Product Leadership",
-      subtitle: "Product Leader spécialisée Data & IA",
+      subtitle: "Product Leader spécialisée **Data & IA**",
       lede: "J'aide les entreprises SaaS, B2B et B2C à structurer leur produit, leur data et leurs équipes — de la stratégie à la mise en production.",
       ctaPrimary: "Discuter de mon projet",
       ctaSecondary: "Voir le parcours",
@@ -213,7 +213,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     nav: { about: "About", services: "Services", experience: "Experience", contact: "Contact" },
     hero: {
       eyebrow: "Freelance · Product Leadership",
-      subtitle: "Product Leader specialized in Data & AI",
+      subtitle: "Product Leader specialized in **Data & AI**",
       lede: "I help SaaS, B2B and B2C companies structure their product, data and teams — from strategy to production.",
       ctaPrimary: "Discuss your project",
       ctaSecondary: "See my track record",
