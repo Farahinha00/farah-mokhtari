@@ -127,48 +127,50 @@ export function AdminEditor({ initialContent }: { initialContent: SiteContent })
           />
         </Section>
 
-        <Section title="Chiffres clés">
-          {t.metrics.map((m, i) => (
-            <div key={i} className="mb-3 grid grid-cols-[1fr_2fr_auto] items-end gap-2">
+        <Section title="Projets clés (hero)">
+          {t.projects.map((p, i) => (
+            <div key={i} className="mb-4 rounded border border-zinc-200 p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="text-xs font-bold uppercase text-zinc-400">Projet {i + 1}</span>
+                <button
+                  type="button"
+                  onClick={() => updateLang((c) => ({ ...c, projects: c.projects.filter((_, idx) => idx !== i) }))}
+                  className="text-xs font-semibold text-red-500 hover:text-red-700"
+                >
+                  Supprimer
+                </button>
+              </div>
               <TextField
-                label="Valeur"
-                value={m.value}
+                label="Titre"
+                value={p.title}
                 onChange={(v) =>
                   updateLang((c) => {
-                    const metrics = c.metrics.slice();
-                    metrics[i] = { ...metrics[i], value: v };
-                    return { ...c, metrics };
+                    const projects = c.projects.slice();
+                    projects[i] = { ...projects[i], title: v };
+                    return { ...c, projects };
                   })
                 }
               />
-              <TextField
-                label="Libellé"
-                value={m.label}
+              <TextAreaField
+                label="Description"
+                rows={2}
+                value={p.description}
                 onChange={(v) =>
                   updateLang((c) => {
-                    const metrics = c.metrics.slice();
-                    metrics[i] = { ...metrics[i], label: v };
-                    return { ...c, metrics };
+                    const projects = c.projects.slice();
+                    projects[i] = { ...projects[i], description: v };
+                    return { ...c, projects };
                   })
                 }
               />
-              <button
-                type="button"
-                onClick={() =>
-                  updateLang((c) => ({ ...c, metrics: c.metrics.filter((_, idx) => idx !== i) }))
-                }
-                className="mb-4 px-2 text-zinc-400 hover:text-red-600"
-              >
-                ✕
-              </button>
             </div>
           ))}
           <button
             type="button"
-            onClick={() => updateLang((c) => ({ ...c, metrics: [...c.metrics, { value: "", label: "" }] }))}
+            onClick={() => updateLang((c) => ({ ...c, projects: [...c.projects, { title: "", description: "" }] }))}
             className="text-xs font-semibold text-zinc-600 hover:text-zinc-900"
           >
-            + Ajouter un chiffre
+            + Ajouter un projet
           </button>
         </Section>
 

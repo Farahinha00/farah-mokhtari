@@ -1,5 +1,7 @@
 export type Metric = { value: string; label: string };
 
+export type ProjectHighlight = { title: string; description: string };
+
 export type Service = {
   title: string;
   audienceLabel: string;
@@ -28,7 +30,7 @@ export type LangContent = {
     ctaSecondary: string;
     availability: string;
   };
-  metrics: Metric[];
+  projects: ProjectHighlight[];
   about: {
     title: string;
     p1: string;

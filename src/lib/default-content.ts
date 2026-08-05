@@ -11,11 +11,24 @@ export const DEFAULT_CONTENT: SiteContent = {
       ctaSecondary: "Voir le parcours",
       availability: "Disponible pour missions courtes ou longues, temps plein ou partiel · Remote ou Paris",
     },
-    metrics: [
-      { value: "-15 pts", label: "de churn (discovery IA)" },
-      { value: "125K€/an", label: "économisés (digitalisation)" },
-      { value: "x2,8", label: "conversion (1,25% → 3,5%)" },
-      { value: "7 mois", label: "de la vision au MVP" },
+    projects: [
+      {
+        title: "Chatbot commercial avec IA générative",
+        description:
+          "Conception et développement d'un assistant conversationnel connecté aux données produits et prix, de l'architecture à la mise en production.",
+      },
+      {
+        title: "Digitalisation du parcours diplômes",
+        description: "Remplacement d'un processus manuel par un parcours digitalisé.",
+      },
+      {
+        title: "Refonte du configurateur véhicule",
+        description: "Optimisation du tunnel de conversion sur un produit déployé dans plus de 10 pays.",
+      },
+      {
+        title: "Lancement d'un SaaS cybersécurité",
+        description: "Construction d'un nouveau produit, de la vision à la mise sur le marché.",
+      },
     ],
     about: {
       title: "Apprendre à me connaître",
@@ -219,11 +232,24 @@ export const DEFAULT_CONTENT: SiteContent = {
       ctaSecondary: "See my track record",
       availability: "Available for short or long missions, full-time or part-time · Remote or Paris",
     },
-    metrics: [
-      { value: "-15 pts", label: "churn (AI discovery)" },
-      { value: "€125K/yr", label: "saved (digitalization)" },
-      { value: "x2.8", label: "conversion (1.25% → 3.5%)" },
-      { value: "7 months", label: "from vision to MVP" },
+    projects: [
+      {
+        title: "AI-powered commercial chatbot",
+        description:
+          "Designed and built a conversational assistant connected to real product and pricing data, from architecture to production.",
+      },
+      {
+        title: "Digitalized graduation process",
+        description: "Replaced a manual workflow with a fully digital journey.",
+      },
+      {
+        title: "Vehicle configurator redesign",
+        description: "Optimized the conversion funnel on a product deployed across 10+ countries.",
+      },
+      {
+        title: "Cybersecurity SaaS launch",
+        description: "Built a new product from vision to market, from the ground up.",
+      },
     ],
     about: {
       title: "Get to know me",

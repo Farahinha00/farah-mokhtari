@@ -16,7 +16,14 @@ export async function getContent(): Promise<SiteContent> {
     .maybeSingle();
 
   if (error || !data) return DEFAULT_CONTENT;
-  return data.data as SiteContent;
+  const stored = data.data as SiteContent;
+
+  // Backfill fields added after this row was last saved from /admin, so a
+  // schema change never crashes the live site before the row is updated.
+  return {
+    fr: { ...DEFAULT_CONTENT.fr, ...stored.fr, hero: { ...DEFAULT_CONTENT.fr.hero, ...stored.fr.hero } },
+    en: { ...DEFAULT_CONTENT.en, ...stored.en, hero: { ...DEFAULT_CONTENT.en.hero, ...stored.en.hero } },
+  };
 }
 
 export async function saveContent(content: SiteContent): Promise<void> {

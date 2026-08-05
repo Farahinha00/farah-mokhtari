@@ -97,17 +97,14 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
         <>
           <div id="hero" style={{ borderBottom: `1px solid ${BORDER}`, position: "relative", overflow: "hidden" }}>
             <svg
-              style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: 60 }}
-              viewBox="0 0 760 60"
-              preserveAspectRatio="none"
+              style={{ position: "absolute", top: 20, right: -30, width: 280, height: 280, opacity: 0.5 }}
+              viewBox="0 0 280 280"
             >
-              <path
-                d="M0 40 Q 40 10, 80 40 T 160 40 T 240 40 T 320 40 T 400 40 T 480 40 T 560 40 T 640 40 T 720 40 T 800 40"
-                stroke={BORDEAUX}
-                strokeWidth="3"
-                fill="none"
-                opacity=".35"
-              />
+              <circle cx="200" cy="80" r="30" stroke={BORDEAUX} strokeWidth="1.5" fill="none" opacity="1" />
+              <circle cx="200" cy="80" r="55" stroke={BORDEAUX} strokeWidth="1.5" fill="none" opacity="1" />
+              <circle cx="200" cy="80" r="80" stroke={BORDEAUX} strokeWidth="1.5" fill="none" opacity=".6" />
+              <circle cx="200" cy="80" r="105" stroke={ACCENT} strokeWidth="1.5" fill="none" opacity=".4" />
+              <circle cx="200" cy="80" r="4" fill={BORDEAUX} />
             </svg>
             <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 48px 60px", position: "relative", zIndex: 1 }}>
               <div
@@ -136,8 +133,8 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                   href="#contact"
                   style={{
                     padding: "16px 32px",
-                    background: ACCENT,
-                    color: ACCENT_TEXT,
+                    background: BORDEAUX,
+                    color: CREAM,
                     borderRadius: 4,
                     fontSize: 15,
                     fontWeight: 800,
@@ -168,19 +165,21 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
               </div>
               <div style={{ fontSize: 12.5, color: MUTED, fontWeight: 600 }}>{t.hero.availability}</div>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", maxWidth: 1200, margin: "0 auto" }}>
-              {t.metrics.map((m, i) => (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", maxWidth: 1200, margin: "0 auto" }}>
+              {t.projects.map((p, i) => (
                 <div
                   key={i}
                   style={{
-                    padding: "36px 24px",
-                    borderRight: `1px solid ${BORDER}`,
+                    padding: "22px 28px",
+                    borderRight: i % 2 === 0 ? `1px solid ${BORDER}` : undefined,
+                    borderBottom: i < 2 ? `1px solid ${BORDER}` : undefined,
                     borderTop: `1px solid ${BORDER}`,
                     textAlign: "left",
                   }}
                 >
-                  <div style={{ fontSize: 38, fontWeight: 800, color: ACCENT, letterSpacing: "-1px" }}>{m.value}</div>
-                  <div style={{ fontSize: 12, color: MUTED, marginTop: 8, textTransform: "uppercase", letterSpacing: ".4px" }}>{m.label}</div>
+                  <div style={{ fontSize: 11, fontWeight: 800, color: BORDEAUX }}>{String(i + 1).padStart(2, "0")}</div>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: TEXT, margin: "4px 0" }}>{p.title}</div>
+                  <div style={{ fontSize: 12.5, lineHeight: 1.4, color: MUTED }}>{p.description}</div>
                 </div>
               ))}
             </div>
