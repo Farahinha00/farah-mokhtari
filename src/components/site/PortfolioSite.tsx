@@ -38,6 +38,9 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
   const [lang, setLang] = useState<Lang>("fr");
   const [activeService, setActiveService] = useState<number | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSending, setFormSending] = useState(false);
+  const [formFields, setFormFields] = useState({ name: "", email: "", project: "", message: "" });
   const [expandedExperience, setExpandedExperience] = useState<number | null>(null);
 
   const t = content[lang];
@@ -48,9 +51,23 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
     setActiveService(null);
   }
 
-  function submitForm(e: React.FormEvent) {
+  async function submitForm(e: React.FormEvent) {
     e.preventDefault();
-    setFormSubmitted(true);
+    setFormSending(true);
+    setFormError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formFields),
+      });
+      if (!res.ok) throw new Error();
+      setFormSubmitted(true);
+    } catch {
+      setFormError(lang === "fr" ? "Échec de l'envoi. Réessaie ou écris-moi directement par email." : "Failed to send. Please try again or email me directly.");
+    } finally {
+      setFormSending(false);
+    }
   }
 
   return (
@@ -376,12 +393,36 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
               </div>
               {!formSubmitted ? (
                 <form onSubmit={submitForm} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  <input placeholder={t.contact.formName} style={inputStyle} />
-                  <input placeholder={t.contact.formEmail} style={inputStyle} />
-                  <input placeholder={t.contact.formProject} style={inputStyle} />
-                  <textarea placeholder={t.contact.formMessage} rows={4} style={{ ...inputStyle, resize: "vertical" }} />
+                  <input
+                    placeholder={t.contact.formName}
+                    value={formFields.name}
+                    onChange={(e) => setFormFields((f) => ({ ...f, name: e.target.value }))}
+                    style={inputStyle}
+                  />
+                  <input
+                    type="email"
+                    placeholder={t.contact.formEmail}
+                    value={formFields.email}
+                    onChange={(e) => setFormFields((f) => ({ ...f, email: e.target.value }))}
+                    style={inputStyle}
+                  />
+                  <input
+                    placeholder={t.contact.formProject}
+                    value={formFields.project}
+                    onChange={(e) => setFormFields((f) => ({ ...f, project: e.target.value }))}
+                    style={inputStyle}
+                  />
+                  <textarea
+                    placeholder={t.contact.formMessage}
+                    rows={4}
+                    value={formFields.message}
+                    onChange={(e) => setFormFields((f) => ({ ...f, message: e.target.value }))}
+                    style={{ ...inputStyle, resize: "vertical" }}
+                  />
+                  {formError && <div style={{ fontSize: 13, color: BORDEAUX }}>{formError}</div>}
                   <button
                     type="submit"
+                    disabled={formSending}
                     style={{
                       padding: "16px 26px",
                       background: ACCENT,
@@ -390,13 +431,14 @@ export function PortfolioSite({ content }: { content: SiteContent }) {
                       borderRadius: 4,
                       fontSize: 15,
                       fontWeight: 800,
-                      cursor: "pointer",
+                      cursor: formSending ? "default" : "pointer",
+                      opacity: formSending ? 0.6 : 1,
                       fontFamily: "inherit",
                       textTransform: "uppercase",
                       letterSpacing: ".5px",
                     }}
                   >
-                    {t.contact.formSubmit}
+                    {formSending ? "…" : t.contact.formSubmit}
                   </button>
                 </form>
               ) : (
